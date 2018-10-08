@@ -1,0 +1,5 @@
+[run]
+include =
+    j2skaffold/*
+omit =
+    j2skaffold/tests/*
