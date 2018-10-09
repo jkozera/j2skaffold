@@ -13,10 +13,14 @@ def main():
         sys.exit(subprocess.call(['skaffold', '--help']))
     else:
         parser = argparse.ArgumentParser()
-        parser.add_argument('command', type=str)
+        filtered_args = [
+            a for a in sys.argv[1:]
+            if a in ['-p', '--keep-yaml'] or a[0] != '-'
+        ]
         parser.add_argument('-p', '--profile')
         parser.add_argument('--keep-yaml', action='store_true')
-        options = parser.parse_args()
+        parser.add_argument('command', type=str)
+        options = parser.parse_args(filtered_args)
         command = options.command
         profile = options.profile
         if options.keep_yaml:
